@@ -1,0 +1,19 @@
+my-redis:
+  image: redis:alpine
+  ports:
+    - "6379:6379"
+celery-worker:
+  build: flower
+  links:
+    - my-redis:redis
+  volumes:
+    - ~/tmp/celery-worker.py:/data/celery-worker.py
+  working_dir: /data
+  command: celery -A celery-worker worker -l info -n worker-%n
+celery-flower:
+  build: flower
+  ports:
+    - "5555:5555"
+  links:
+    - my-redis:redis
+  command: celery flower --broker=redis://redis
