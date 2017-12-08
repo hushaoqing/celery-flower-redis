@@ -1,2 +1,2 @@
 # celery-flower-redis
-deploy Celery with Redis and Flower
+deploy Celery with Redis and Flower using Docker
