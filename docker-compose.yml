@@ -9,7 +9,7 @@ celery-worker:
   volumes:
     - ~/tmp/celery-worker.py:/data/celery-worker.py
   working_dir: /data
-  command: celery -A celery-worker worker -l info -n worker-%n
+  command: celery -A celery-worker worker -b=redis://redis -l info -n worker-%n
 celery-flower:
   build: flower
   ports:
